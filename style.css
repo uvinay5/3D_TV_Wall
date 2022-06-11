@@ -1,101 +1,183 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
-
-:root {
-    --wall: #01936c;
-    --wallPattern: #013927;
-    --floorPattern: #b7b7b7;
-  }
-
-*{
-    margin: 0px;
-    padding: 0px;
-    font-family: 'Poppins';
+ :root {
+     --wall: #01936c;
+     --wallPattern: #013927;
+     --floorPattern: #b7b7b7;
+     --cameraAngle:50deg;
+     --NcameraAngle:-50deg;
 }
-body{
-    color: wheat;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #000;
-    overflow: hidden;
+ *{
+     margin: 0px;
+     padding: 0px;
+     font-family: 'Poppins';
 }
-.contanier{
-    perspective: 900px;
-    width: 80%;
-    height:75%;
-    transform: translateY(-50px);
+ body{
+     color: wheat;
+     position: relative;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     height: 100vh;
+     background-color: #000;
+     overflow: hidden;
 }
-
-
-@keyframes CameraViewWall {
-    from {
-        transform: rotateY(30deg);}
-    to {
-        transform: rotateY(-30deg);}
+ .contanier{
+     perspective: 1000px;
+     width: 80%;
+     height:75%;
+     transform: translateY(-50px);
+     animation: CameraProspective linear 3s infinite alternate;
 }
-@keyframes CameraViewfloor {
-    from {
-        transform: rotateY(30deg) rotateX(90deg);}
-    to {
-        transform: rotateY(-30deg) rotateX(90deg);}
+ .flexBox{
+     display: flex;
+     align-items: center;
+     justify-content: center;
 }
-.flexBox{
-    display: flex;
-    align-items: center;
-    justify-content: center;
+ .contanier .wall{
+     transform-style: preserve-3d;
+     width: 100%;
+     height: 100%;
+     background: linear-gradient(135deg, var(--wallPattern) 10%, var(--wall) 10%), linear-gradient(225deg, var(--wallPattern) 10%, var(--wall) 10%), linear-gradient(315deg, var(--wallPattern) 10%, var(--wall) 10%), linear-gradient(45deg, var(--wallPattern) 10%, var(--wall) 10%);
+     background-size: 2vw 2vw;
+     box-shadow:inset 0px 40px 60px #000, inset 60px 40px 60px #000, inset -60px 60px 60px #000;
+     animation: CameraViewWall linear 5s infinite alternate;
+     flex-flow: column;
 }
-.contanier .wall{
-    transform-style: preserve-3d;
-    width: 100%;
-    height: 100%;
-    background: 
-    linear-gradient(135deg, var(--wallPattern) 10%, var(--wall) 10%),
-        linear-gradient(225deg, var(--wallPattern) 10%, var(--wall) 10%),
-        linear-gradient(315deg, var(--wallPattern) 10%, var(--wall) 10%),
-        linear-gradient(45deg, var(--wallPattern) 10%, var(--wall) 10%);
-    background-size: 2vw 2vw;
-    box-shadow:inset 0px 40px 60px #000, inset 60px 40px 60px #000, inset -60px 60px 60px #000;
-    animation: CameraViewWall linear 5s infinite alternate;
+ .contanier .floor{
+     transform-style: preserve-3d;
+     transform: rotateX(90deg);
+     transform-origin: top;
+     background: white;
+     background: linear-gradient(135deg, var(--floorPattern) 30%, transparent 30%), linear-gradient(225deg, var(--floorPattern) 30%, transparent 30%), linear-gradient(315deg, var(--floorPattern) 30%, transparent 30%), linear-gradient(45deg, var(--floorPattern) 30%, transparent 30%);
+     background-size: 5vw 5vw;
+     box-shadow:inset 0px -72px 60px #000, inset 60px -73px 60px #000, inset -60px 00px 60px #000;
+     width: 100%;
+     height: 120%;
+     animation: CameraViewfloor linear 5s infinite alternate;
 }
-.contanier .floor{
-    transform-style: preserve-3d;
-    transform: rotateX(90deg);
-    transform-origin: top;
-    background: white;
-    background: 
-        linear-gradient(135deg, var(--floorPattern) 30%, transparent 30%),
-        linear-gradient(225deg, var(--floorPattern) 30%, transparent 30%),
-        linear-gradient(315deg, var(--floorPattern) 30%, transparent 30%),
-        linear-gradient(45deg, var(--floorPattern) 30%, transparent 30%);
-    background-size: 5vw 5vw;
-    box-shadow:inset 0px -72px 60px #000, inset 60px -73px 60px #000, inset -60px 00px 60px #000;
-    width: 100%;
-    height: 120%;
-    animation: CameraViewfloor linear 5s infinite alternate;
+ .wall .tv{
+     transform: translateZ(15px);
+     width: 30vw;
+     height: 18vw;
+     position: relative;
+     background: linear-gradient(to bottom, #2a2a2a , #000000);
+     transform-style: preserve-3d;
 }
-.wall .tv{
-    transform: translateZ(20px);
-    width: 30vw;
-    height: 18vw;
-    position: relative;
-    background: black;
-    transform-style: preserve-3d;
+ .wall .tvStand{
+     transform: translateY(10px) translateZ(20px) rotateX(90deg);
+     width: 30vw;
+     height: 5vw;
+     position: relative;
+     background: linear-gradient(to bottom, #272727 , #464646);
+     transform-style: preserve-3d;
 }
-
-.wall .tv::before{
-    transform: translateZ(-20px);
-    position: absolute;
-    content: '';
-    width: 100%;
-    height: 100%;
-    background-color: rgba(7, 7, 7,90%);
-    box-shadow:rgb(8 10 11) 0px 6px 25px 9px
+ .wall .tvStand::before{
+     transform: translateY(1vw) rotateX(90deg);
+     position: absolute;
+     content: '';
+     width: 100%;
+     height: 5%;
+     box-shadow: 0px -14px 12px 8px rgb(22 22 22) 
 }
-.wall .tv .screen{
-    width: 98%;
-    height: 97%;
-    background-color: white;
-
+ .wall .tvStand::after{
+     transform: translateZ(-5px);
+     position: absolute;
+     content: '';
+     width: 100%;
+     height: 100%;
+     background: linear-gradient(to bottom, #2a2a2a , #000000);
 }
+ .wall .tv::before{
+     transform: translateZ(-7px );
+     position: absolute;
+     content: '';
+     width: 100%;
+     height: 100%;
+     background: linear-gradient(to bottom, #2a2a2a , #000000);
+     box-shadow:rgb(8 10 11) 0px 6px 25px 9px 
+}
+ .wall .tv::after{
+     transform: translateZ(00px) translateY(3px);
+     position: absolute;
+     content: '';
+     width: 30%;
+     height: 3%;
+     background-color: rgba(0, 0, 0, 0.9);
+     bottom: 0;
+     clip-path: polygon(0 0, 100% 0, 80% 100%, 20% 100%);
+}
+ .wall .tv .screen {
+     width: 98%;
+     height: 97%;
+     background-color: rgb(18, 2, 37);
+     overflow: hidden;
+     display: flex;
+     justify-content: space-evenly;
+}
+ .wall .tv .screen span{
+     width:1px;
+     height: 2px;
+     background-color: var(--color);
+     animation: screenAnim linear 5s infinite;
+     animation-duration:calc(40s / var(--i) );
+}
+ .wall .tvStand .StandSides{
+     position: absolute;
+     bottom: -10px;
+     width: 30vw;
+     height: 1vw;
+     transform:translateZ(-1px) rotateX(90deg);
+     background: #000;
+     transform-style: preserve-3d;
+}
+ .wall .tvStand .StandSides::before{
+     transform:translateZ(5vw) rotateY(90deg);
+     transform-origin: left;
+     content: '';
+     position: absolute;
+     width: 5vw;
+     height: 1vw;
+     background-color: black;
+}
+ .wall .tvStand .StandSides::after{
+     transform: translateX(25vw) rotateY(90deg);
+     transform-origin: right;
+     content: '';
+     position: absolute;
+     width: 5vw;
+     height: 1vw;
+     background-color: black;
+}
+ @keyframes screenAnim{
+     from {
+         transform: translateY(120px) scale(1.5)
+    }
+     to {
+         transform: translateY(-120px) scale(2)
+    }
+}
+ @keyframes CameraProspective{
+     from {
+         perspective-origin: 50% 50%;
+    }
+     to {
+         perspective-origin: 50% 10%;
+    }
+}
+ @keyframes CameraViewWall {
+     from {
+         transform: rotateY(var(--cameraAngle)) ;
+    }
+     to {
+         transform: rotateY(var(--NcameraAngle)) ;
+    }
+}
+ @keyframes CameraViewfloor {
+     from {
+         transform: rotateY(var(--cameraAngle)) rotateX(90deg);
+    }
+     to {
+         transform: rotateY(var(--NcameraAngle)) rotateX(90deg) ;
+    }
+}
+ 
