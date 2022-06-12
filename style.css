@@ -5,8 +5,8 @@
      --floorPattern: #b7b7b7;
      --cameraAngle:50deg;
      --NcameraAngle:-50deg;
-     --ChairAngle:15deg;
-     --NChairAngle:-150deg;
+     --ChairAngle:0deg;
+     --NChairAngle:-115deg;
 }
  *{
      margin: 0px;
@@ -232,6 +232,33 @@
     height: 40px;
 }
 
+.floor .chair .Echo{
+    width: 6vw;
+    height: 6vw;
+    border-radius: 50%;
+    animation: rotateEcho linear 5s infinite alternate;
+}
+
+
+.floor .chair .Echo div{
+    background-image: url("/echoImage1.jpg");
+    background-position: right;
+    background-size: 100%;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    transform: rotateZ(180deg);
+}
+
+
+@keyframes rotateEcho{
+    from {
+        transform: translateZ(10.6vw) translateY(3.8vw)  translateX(5vw) rotateX(90deg) rotateY(var(--ChairAngle) );
+    }
+    to {
+        transform:translateZ(10.6vw) translateY(3.8vw)  translateX(5vw) rotateX(90deg) rotateY(var(--NChairAngle) );
+   }
+}
 
 @keyframes rotateChair{
     from {
