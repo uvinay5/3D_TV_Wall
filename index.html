@@ -1,334 +1,64 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
- :root {
-     --wall: #01936c;
-     --wallPattern: #013927;
-     --floorPattern: #b7b7b7;
-     --cameraAngle:50deg;
-     --NcameraAngle:-50deg;
-     --ChairAngle:0deg;
-     --NChairAngle:-115deg;
-}
- *{
-     margin: 0px;
-     padding: 0px;
-     font-family: 'Poppins';
-}
- body{
-     color: #fff;
-     position: relative;
-     display: flex;
-     justify-content: center;
-     align-items: center;
-     height: 100vh;
-     background-color: #000;
-     overflow: hidden;
-}
- .contanier{
-     perspective: 1000px;
-     width: 100%;
-     height:75%;
-     transform: translateY(-50px);
-     animation: CameraProspective linear 3s infinite alternate;
-}
- .flexBox{
-     display: flex;
-     align-items: center;
-     justify-content: center;
-}
- .contanier .wall{
-     transform-style: preserve-3d;
-     width: 90%;
-     height: 100%;
-     margin: auto;
-     background: linear-gradient(135deg, var(--wallPattern) 10%, var(--wall) 10%), linear-gradient(225deg, var(--wallPattern) 10%, var(--wall) 10%), linear-gradient(315deg, var(--wallPattern) 10%, var(--wall) 10%), linear-gradient(45deg, var(--wallPattern) 10%, var(--wall) 10%);
-     background-size: 2vw 2vw;
-     box-shadow:inset 0px 40px 60px #000, inset 60px 40px 60px #000, inset -60px 60px 60px #000;
-     animation: CameraViewWall linear 5s infinite alternate;
-     flex-flow: column;
-}
- .contanier .floor{
-     transform-style: preserve-3d;
-     transform: rotateX(90deg);
-     transform-origin: top;
-     margin: auto;
-     background: white;
-     background: linear-gradient(135deg, var(--floorPattern) 30%, transparent 30%), linear-gradient(225deg, var(--floorPattern) 30%, transparent 30%), linear-gradient(315deg, var(--floorPattern) 30%, transparent 30%), linear-gradient(45deg, var(--floorPattern) 30%, transparent 30%);
-     background-size: 5vw 5vw;
-     box-shadow:inset 0px -72px 60px #000, inset 60px -73px 60px #000, inset -60px 00px 60px #000;
-     width: 90%;
-     height: 120%;
-     animation: CameraViewfloor linear 5s infinite alternate;
-}
+<!DOCTYPE html>
+<html lang="en">
 
-.controls{
-    height: 100vh;
-    margin: 25px;
-    align-items: baseline;
-    position: fixed;
-    top: 0px;
-    right: 0px;
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
 
-}
- .wall .tv{
-     transform: translateZ(15px);
-     width: 30vw;
-     height: 18vw;
-     position: relative;
-     background: linear-gradient(to bottom, #2a2a2a , #000000);
-     transform-style: preserve-3d;
-}
- .wall .tvStand{
-     transform: translateY(10px) translateZ(20px) rotateX(90deg);
-     width: 30vw;
-     height: 5vw;
-     position: relative;
-     background: linear-gradient(to bottom, #272727 , #464646);
-     transform-style: preserve-3d;
-}
- .wall .tvStand::before{
-     transform: translateY(1vw) rotateX(90deg);
-     position: absolute;
-     content: '';
-     width: 100%;
-     height: 5%;
-     box-shadow: 0px -6px 12px 8px rgb(22 22 22),inset 0px -6px 12px 8px rgb(22 22 22) 
-}
- .wall .tvStand::after{
-     transform: translateZ(-5px);
-     position: absolute;
-     content: '';
-     width: 100%;
-     height: 100%;
-     background: linear-gradient(to bottom, #2a2a2a , #000000);
-}
- .wall .tv::before{
-     transform: translateZ(-7px );
-     position: absolute;
-     content: '';
-     width: 100%;
-     height: 100%;
-     background: linear-gradient(to bottom, #2a2a2a , #000000);
-     box-shadow:rgb(8 10 11) 0px 6px 25px 9px 
-}
- .wall .tv::after{
-     transform: translateZ(00px) translateY(3px);
-     position: absolute;
-     content: '';
-     width: 30%;
-     height: 3%;
-     background-color: rgba(0, 0, 0, 0.9);
-     bottom: 0;
-     clip-path: polygon(0 0, 100% 0, 80% 100%, 20% 100%);
-}
- .wall .tv .screen {
-     width: 98%;
-     height: 97%;
-     background-color: rgb(18, 2, 37);
-     overflow: hidden;
-     display: flex;
-     align-items: center;
-     justify-content: space-evenly;
-}
-.screen .Profile {
-    font-weight: bolder;
-    font-size: 1vw;
-   position:absolute ;
-   animation: ProfileAnimation   linear 10s infinite alternate;
-}
-.screen .Profile span{
-    font-size: 1.2vw;
-}
- .wall .tv .screen span{
-     width:1px;
-     height: 2px;
-     background-color: var(--color);
-     animation: screenAnim linear 5s infinite;
-     animation-duration:calc(40s / var(--i) );
-}
- .wall .tvStand .StandSides{
-     position: absolute;
-     bottom: -10px;
-     width: 30vw;
-     height: 1vw;
-     transform:translateZ(-1px) rotateX(90deg);
-     background: #000;
-     transform-style: preserve-3d;
-}
- .wall .tvStand .StandSides::before{
-     transform:translateZ(5vw) rotateY(90deg);
-     transform-origin: left;
-     content: '';
-     position: absolute;
-     width: 5vw;
-     height: 1vw;
-     background-color: black;
-}
- .wall .tvStand .StandSides::after{
-     transform: translateX(25vw) rotateY(90deg);
-     transform-origin: right;
-     content: '';
-     position: absolute;
-     width: 5vw;
-     height: 1vw;
-     background-color: black;
-}
+<body>
+    <div class="contanier">
+        <div class="wall flexBox">
+            <div class="tv flexBox">
+                <div class="screen flexBox">
+                    <div class="Profile">Made By <br /><span>Vinay</span></div>
+                    <span style="--i:23;--color:#d990f9"></span>
+                    <span style="--i:43;--color:#ff5e02"></span>
+                    <span style="--i:21;--color:#d1fe21"></span>
+                    <span style="--i:12;--color:#8bd0fb"></span>
+                    <span style="--i:23;--color:#c1fab4"></span>
+                    <span style="--i:34;--color:#87cdc5"></span>
+                    <span style="--i:12;--color:#29e9aa"></span>
+                    <span style="--i:8;--color:#1ca50d"></span>
+                    <span style="--i:34;--color:#bc6a6a"></span>
+                    <span style="--i:21;--color:#203fcd"></span>
+                    <span style="--i:28;--color:#66a197"></span>
+                    <span style="--i:20;--color:#5d143b"></span>
+                    <span style="--i:27;--color:#8edd76"></span>
+                    <span style="--i:19;--color:#21cf11"></span>
+                    <span style="--i:16;--color:#d894da"></span>
+                    <span style="--i:32;--color:#b0623d"></span>
+                    <span style="--i:27;--color:#b3f241"></span>
+                    <span style="--i:31;--color:#fd52f1"></span>
+                    <span style="--i:35;--color:#653aec"></span>
+                    <span style="--i:13;--color:#1061e7"></span>
+                </div>
+            </div>
 
-.floor .chair{
-    transform:translateX(200px) translateY(-120px) rotateZ(75deg);
-    transform-style: preserve-3d;
-}
+            <div class="tvStand">
+                <div class="StandSides"></div>
+            </div>
 
-.floor .chair .base{
-    position: absolute;
-    transform: translateZ(8vw) ;
-    width: 15vw;
-    height: 15vw;
-    background:radial-gradient(#2a5063,#3576ca,#575757  70%);
-    border-radius: 50%;
-    transform-style: preserve-3d;
-    box-shadow: rgba(50, 50, 93, 4.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 1.3) 0px 18px 36px -18px inset;
-}
-.floor .chair .base::after{
-    position: absolute;
-    content: '';
-    width: 12vw;
-    height: 7.9vw;
-    animation: rotateChair linear 5s infinite alternate;
-    background: linear-gradient(to bottom, #3d3d3d , #575757);
-    box-shadow: inset rgba(17, 17, 26, .5) 0px -40px 5px
-}
+        </div>
+        <div class="floor flexBox">
+            <div class="chair">
+                <div class="base"></div>
+                <div class="Echo">
+                    <div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="github">
+        <a href="https://github.com/uvinay5/tv_wall_3D" target="_blank">
+            <div><img src="github_logo.jpg" /></div>
+            <div>GitHub</div>
+        </a>
+    </div>
+</body>
 
-.floor .chair .base::before{
-    position: absolute;
-    transform: translateZ(-8vw) ;
-    content: '';
-    width: 15vw;
-    height: 15vw;
-    bottom:  0px;
-    background-color: #3d3d3d;
-    border-radius: 50%;
-    box-shadow: rgba(17, 17, 26, .5) 12px 4px 16px, rgba(17, 17, 26, .5) 12px 8px 24px, rgba(17, 17, 26, 1.1) 12px 16px 56px;
-}
-
-.github{
-    position: absolute;
-    bottom: 0px;
-    right: 0px;
-    margin-right: 20px;
-    margin-bottom: 5px;
-    font-weight: bolder;
-    filter: drop-shadow(0px 0px 5px black);
-}
-.github a{
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    text-decoration: none;
-    color: #fff;
-}
-.github img{
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-}
-
-.floor .chair .Echo{
-    width: 6vw;
-    height: 6vw;
-    border-radius: 50%;
-    animation: rotateEcho linear 5s infinite alternate;
-}
-
-
-.floor .chair .Echo div{
-    background-image: url("/echoImage1.jpg");
-    background-position: right;
-    background-size: 100%;
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    transform: rotateZ(180deg);
-}
-
-
-@keyframes rotateEcho{
-    from {
-        transform: translateZ(10.6vw) translateY(3.8vw)  translateX(5vw) rotateX(90deg) rotateY(var(--ChairAngle) );
-    }
-    to {
-        transform:translateZ(10.6vw) translateY(3.8vw)  translateX(5vw) rotateX(90deg) rotateY(var(--NChairAngle) );
-   }
-}
-
-@keyframes rotateChair{
-    from {
-        transform: translateZ(-4vw) translateY(3.5vw) translateX(1.6vw) rotateX(90deg) rotateY(var(--ChairAngle));
-    }
-    to {
-        transform:translateZ(-4vw)  translateY(3.5vw) translateX( 1.6vw) rotateX(90deg) rotateY(var(--NChairAngle));
-   }
-}
-
-@keyframes ProfileAnimation{
-    0% {
-        transform: translateX(200%) translateY(200%)
-    }
-    20% {
-        transform: translateX(0%) translateY(0%)
-    }
-    40% {
-        transform: translateX(120%) translateY(-200%)
-    }
-    60% {
-        transform: translateX(-200%) translateY(-200%)
-    }
-    80% {
-        transform: translateX(0%) translateY(0%)
-    }
-    100% {
-        transform: translateX(-200%) translateY(200%)
-    }
-    /* 40% {
-        transform: translateX(200%) translateY(0%)
-    }
-    0% {
-        transform: translateX(200%) translateY(200%)
-    }
-    to {
-        transform:translateX(-200%) translateY(-200%)
-   } */
-}
-
- @keyframes screenAnim{
-     from {
-         transform: translateY(120px) scale(1.5)
-    }
-     to {
-         transform: translateY(-120px) scale(2)
-    }
-}
- @keyframes CameraProspective{
-     from {
-         perspective-origin: 50% 50%;
-    }
-     to {
-         perspective-origin: 50% 10%;
-    }
-}
- @keyframes CameraViewWall {
-     from {
-         transform: rotateY(var(--cameraAngle)) ;
-    }
-     to {
-         transform: rotateY(var(--NcameraAngle)) ;
-    }
-}
- @keyframes CameraViewfloor {
-     from {
-         transform: rotateY(var(--cameraAngle)) rotateX(90deg);
-    }
-     to {
-         transform: rotateY(var(--NcameraAngle)) rotateX(90deg) ;
-    }
-}
- 
+</html>
