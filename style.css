@@ -5,6 +5,8 @@
      --floorPattern: #b7b7b7;
      --cameraAngle:50deg;
      --NcameraAngle:-50deg;
+     --ChairAngle:15deg;
+     --NChairAngle:-150deg;
 }
  *{
      margin: 0px;
@@ -12,7 +14,7 @@
      font-family: 'Poppins';
 }
  body{
-     color: wheat;
+     color: #fff;
      position: relative;
      display: flex;
      justify-content: center;
@@ -23,7 +25,7 @@
 }
  .contanier{
      perspective: 1000px;
-     width: 80%;
+     width: 100%;
      height:75%;
      transform: translateY(-50px);
      animation: CameraProspective linear 3s infinite alternate;
@@ -35,8 +37,9 @@
 }
  .contanier .wall{
      transform-style: preserve-3d;
-     width: 100%;
+     width: 90%;
      height: 100%;
+     margin: auto;
      background: linear-gradient(135deg, var(--wallPattern) 10%, var(--wall) 10%), linear-gradient(225deg, var(--wallPattern) 10%, var(--wall) 10%), linear-gradient(315deg, var(--wallPattern) 10%, var(--wall) 10%), linear-gradient(45deg, var(--wallPattern) 10%, var(--wall) 10%);
      background-size: 2vw 2vw;
      box-shadow:inset 0px 40px 60px #000, inset 60px 40px 60px #000, inset -60px 60px 60px #000;
@@ -47,13 +50,24 @@
      transform-style: preserve-3d;
      transform: rotateX(90deg);
      transform-origin: top;
+     margin: auto;
      background: white;
      background: linear-gradient(135deg, var(--floorPattern) 30%, transparent 30%), linear-gradient(225deg, var(--floorPattern) 30%, transparent 30%), linear-gradient(315deg, var(--floorPattern) 30%, transparent 30%), linear-gradient(45deg, var(--floorPattern) 30%, transparent 30%);
      background-size: 5vw 5vw;
      box-shadow:inset 0px -72px 60px #000, inset 60px -73px 60px #000, inset -60px 00px 60px #000;
-     width: 100%;
+     width: 90%;
      height: 120%;
      animation: CameraViewfloor linear 5s infinite alternate;
+}
+
+.controls{
+    height: 100vh;
+    margin: 25px;
+    align-items: baseline;
+    position: fixed;
+    top: 0px;
+    right: 0px;
+
 }
  .wall .tv{
      transform: translateZ(15px);
@@ -77,7 +91,7 @@
      content: '';
      width: 100%;
      height: 5%;
-     box-shadow: 0px -14px 12px 8px rgb(22 22 22) 
+     box-shadow: 0px -6px 12px 8px rgb(22 22 22),inset 0px -6px 12px 8px rgb(22 22 22) 
 }
  .wall .tvStand::after{
      transform: translateZ(-5px);
@@ -112,7 +126,17 @@
      background-color: rgb(18, 2, 37);
      overflow: hidden;
      display: flex;
+     align-items: center;
      justify-content: space-evenly;
+}
+.screen .Profile {
+    font-weight: bolder;
+    font-size: 1vw;
+   position:absolute ;
+   animation: ProfileAnimation   linear 10s infinite alternate;
+}
+.screen .Profile span{
+    font-size: 1.2vw;
 }
  .wall .tv .screen span{
      width:1px;
@@ -148,6 +172,106 @@
      height: 1vw;
      background-color: black;
 }
+
+.floor .chair{
+    transform:translateX(200px) translateY(-120px) rotateZ(75deg);
+    transform-style: preserve-3d;
+}
+
+.floor .chair .base{
+    position: absolute;
+    transform: translateZ(8vw) ;
+    width: 15vw;
+    height: 15vw;
+    background:radial-gradient(#2a5063,#3576ca,#575757  70%);
+    border-radius: 50%;
+    transform-style: preserve-3d;
+    box-shadow: rgba(50, 50, 93, 4.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 1.3) 0px 18px 36px -18px inset;
+}
+.floor .chair .base::after{
+    position: absolute;
+    content: '';
+    width: 12vw;
+    height: 7.9vw;
+    animation: rotateChair linear 5s infinite alternate;
+    background: linear-gradient(to bottom, #3d3d3d , #575757);
+    box-shadow: inset rgba(17, 17, 26, .5) 0px -40px 5px
+}
+
+.floor .chair .base::before{
+    position: absolute;
+    transform: translateZ(-8vw) ;
+    content: '';
+    width: 15vw;
+    height: 15vw;
+    bottom:  0px;
+    background-color: #3d3d3d;
+    border-radius: 50%;
+    box-shadow: rgba(17, 17, 26, .5) 12px 4px 16px, rgba(17, 17, 26, .5) 12px 8px 24px, rgba(17, 17, 26, 1.1) 12px 16px 56px;
+}
+
+.github{
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    margin-right: 20px;
+    margin-bottom: 5px;
+    font-weight: bolder;
+    filter: drop-shadow(0px 0px 5px black);
+}
+.github a{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    text-decoration: none;
+    color: #fff;
+}
+.github img{
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+}
+
+
+@keyframes rotateChair{
+    from {
+        transform: translateZ(-4vw) translateY(3.5vw) translateX(1.6vw) rotateX(90deg) rotateY(var(--ChairAngle));
+    }
+    to {
+        transform:translateZ(-4vw)  translateY(3.5vw) translateX( 1.6vw) rotateX(90deg) rotateY(var(--NChairAngle));
+   }
+}
+
+@keyframes ProfileAnimation{
+    0% {
+        transform: translateX(200%) translateY(200%)
+    }
+    20% {
+        transform: translateX(0%) translateY(0%)
+    }
+    40% {
+        transform: translateX(120%) translateY(-200%)
+    }
+    60% {
+        transform: translateX(-200%) translateY(-200%)
+    }
+    80% {
+        transform: translateX(0%) translateY(0%)
+    }
+    100% {
+        transform: translateX(-200%) translateY(200%)
+    }
+    /* 40% {
+        transform: translateX(200%) translateY(0%)
+    }
+    0% {
+        transform: translateX(200%) translateY(200%)
+    }
+    to {
+        transform:translateX(-200%) translateY(-200%)
+   } */
+}
+
  @keyframes screenAnim{
      from {
          transform: translateY(120px) scale(1.5)
